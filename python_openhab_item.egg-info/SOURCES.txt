@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.cfg
+setup.py
+openhab/__init__.py
+openhab/item.py
+python_openhab_item.egg-info/PKG-INFO
+python_openhab_item.egg-info/SOURCES.txt
+python_openhab_item.egg-info/dependency_links.txt
+python_openhab_item.egg-info/not-zip-safe
+python_openhab_item.egg-info/requires.txt
+python_openhab_item.egg-info/top_level.txt

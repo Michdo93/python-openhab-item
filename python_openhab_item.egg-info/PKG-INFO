@@ -1,0 +1,163 @@
+Metadata-Version: 2.1
+Name: python-openhab-item
+Version: 0.1.0
+Summary: A simple class to represent items from openHAB. There is a separate object for each item type. The class can be used in conjunction with the REST API of openHAB.
+Home-page: https://github.com/Michdo93/python-openhab-item
+Download-URL: https://github.com/Michdo93/python-openhab-item
+Author: Michael Dörflinger
+Author-email: michaeldoerflinger93@gmail.com
+License: MIT License
+Project-URL: Bug Tracker, https://github.com/Michdo93/python-openhab-item/issues
+Project-URL: Documentation, https://github.com/Michdo93/python-openhab-item/blob/main/README.md
+Project-URL: Source Code, https://github.com/Michdo93/python-openhab-item
+Keywords: openHAB
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# Python openHAB Item
+A simple module to represent `Items` from `openHAB`. There is a separate object for each `Item Type`. The module can be used in conjunction with the [REST API](https://www.openhab.org/docs/configuration/restdocs.html) of `openHAB`.
+
+## Installation
+
+You can install it by using `pip`:
+
+```
+python3 -m pip install python-openhab-item
+```
+
+## Usage
+
+You have to import either `Item` or one of the `Item` objects:
+
+```
+from openhab import Item, ColorItem, ContactItem, DateTimeItem, DimmerItem, GroupItem, ImageItem, LocationItem, NumberItem, PlayerItem, RollershutterItem, StringItem, SwitchItem
+```
+
+### Basic Item Creation
+
+You can create an `Item` by using an `Item` object like this:
+
+```
+item = Item("Switch", "my_switch")
+```
+
+So you need at least the [Item Type](https://www.openhab.org/docs/configuration/items.html#type) and the `name` of your `Item`. You can choose between following `Item Types`:
+
+* Color
+* Contact
+* DateTime
+* Dimmer
+* Group
+* Image
+* Location
+* Number
+* Player
+* Rollershutter
+* String
+* Switch
+
+The constructor will automatically check if you choosed a correct `Item Type`. The `type` and `name` attribute are checked if a `str` is passed. Both are required. Alternatively you can run:
+
+```
+item = Item(type="Switch", name="my_switch")
+```
+
+Instead of creating an `Item` object you can create an object for each `Item Type`. You do not need to pass a `parameter` for the `type` attribute, so only the `name` is required:
+
+```
+color = ColorItem("my_color")
+contact = ContactItem("my_contact")
+datetime = DateTimeItem("my_datetime")
+dimmer = DimmerItem("my_dimmer")
+group = GroupItem("my_group")
+image = ImageItem("my_image")
+location = LocationItem("my_location")
+number = NumberItem("my_number")
+player = PlayerItem("my_player")
+rollershutter = RollershutterItem("my_rollershutter")
+string = StringItem("my_string")
+switch = SwitchItem("my_switch")
+```
+
+Optional attributes are `state`, `tags` or `groups`.
+
+### Set State
+
+If you will set a `state` it will automatically validate if the `state` is valid:
+
+```
+switch = SwitchItem("my_switch", "ON")
+switch2 = Item("Switch", "my_switch2", "ON")
+```
+
+or
+
+```
+switch = SwitchItem(name="my_switch", state="ON")
+switch2 = Item(type="Switch", name="my_switch2", state="ON")
+```
+
+or
+
+```
+switch = SwitchItem("my_switch")
+switch.setState("ON")
+switch2 = Item("Switch", "my_switch2")
+switch2.setState("ON")
+```
+
+You can validate if a `state` is correct before you set it, so your program doesn't abort because of an error message:
+
+```
+switch = SwitchItem("my_switch")
+
+if switch.validate("ON"):
+    switch.setState("ON")
+```
+
+And of course the `state` does not have to be a `str` if the `Item Type` allows other values:
+
+```
+number = NumberItem("my_number", 3.14)
+number2 = NumberItem("my_number2", 21)
+```
+
+### Get State
+
+From an `Item` object you can logically also query what the `state` is:
+
+```
+switch = SwitchItem("my_switch", "ON")
+switch_state = switch.getState()
+print(switch_state)
+
+number = NumberItem("my_number", 3.14)
+number_state = number.getState()
+print(number_state)
+```
+
+### Set Tag(s)
+
+To each `Item` you can set a [tag](https://www.openhab.org/docs/configuration/items.html#tags) or multiple tags. Therefore you need a `list` object. As example the `tag` `Switchable`:
+
+```
+switch = SwitchItem("my_switch", "ON", ["Switchable"])
+switch2 = SwitchItem(name="my_switch2", state="ON", tags=["Switchable"])
+switch3 = SwitchItem(name="my_switch3")
+```
+
+### Set Group(s)
+
+An `Item` can be subordinated to one or more `Group`'s. Therefore you will also need a `list` object:
+
+```
+switch = SwitchItem("my_switch", "ON", ["Switchable"], ["group1", "group2"])
+switch2 = SwitchItem(name="my_switch2", state="ON", tags=["Switchable"], groups=["group1", "group2"])
+```
