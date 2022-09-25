@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: python-openhab-item
-Version: 0.1.1
+Version: 1.0.0
 Summary: A simple class to represent items from openHAB. There is a separate object for each item type. The class can be used in conjunction with the REST API of openHAB.
 Home-page: https://github.com/Michdo93/python-openhab-item
 Download-URL: https://github.com/Michdo93/python-openhab-item

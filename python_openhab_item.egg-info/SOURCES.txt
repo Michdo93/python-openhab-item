@@ -58,7 +58,6 @@ setup.py
 .eggs/tomli-2.0.1-py3.8.egg/tomli/_re.py
 .eggs/tomli-2.0.1-py3.8.egg/tomli/_types.py
 .eggs/tomli-2.0.1-py3.8.egg/tomli/py.typed
-dist/python_openhab_item-0.1.0-py3-none-any.whl
 openhab/__init__.py
 openhab/item.py
 openhab/__pycache__/__init__.cpython-38.pyc
